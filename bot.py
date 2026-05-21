@@ -1,3 +1,4 @@
+print("BOT FILE STARTED")
 # COPYRIGHT © 2026 BY AXIOMBOTS 🔥
 # NOW PUBLIC BY AXIOM
 import os
@@ -8,11 +9,23 @@ from os import system
 from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
 api_hash = os.getenv("API_HASH")
 token = os.getenv("BOT_TOKEN")
+print("API_ID =", api_id)
+print("API_HASH =", api_hash)
+print("TOKEN =", token)
+
+print("CREATING CLIENT")
+
 client = TelegramClient(
-    'axiomm',
+    "axiomm",
     api_id,
     api_hash
-).start(bot_token=token)
+)
+
+print("STARTING CLIENT")
+
+client.start(bot_token=token)
+
+print("CLIENT STARTED")
 from telethon import TelegramClient as tg
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest as pc, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dc
 from telethon.sessions import StringSession as ses
@@ -373,4 +386,5 @@ async def start(event):
 
 
 
+print("BOT IS RUNNING NOW")
 client.run_until_disconnected()
