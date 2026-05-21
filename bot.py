@@ -26,7 +26,11 @@ print("STARTING CLIENT")
 client.start(bot_token=token)
 client.parse_mode = 'md'
 
-me = client.loop.run_until_complete(client.get_me())
+async def startup():
+    me = await client.get_me()
+    print("BOT USERNAME =", me.username)
+
+client.loop.run_until_complete(startup())
 print("BOT USERNAME =", me.username)
 
 print("CLIENT STARTED")
