@@ -407,4 +407,16 @@ async def allmsg(event):
 
 
 print("BOT IS RUNNING NOW")
+
+@client.on(events.Raw)
+async def raw(event):
+    print("RAW EVENT:", type(event))
+
+@client.on(events.NewMessage(incoming=True))
+async def test(event):
+    print("NEW MESSAGE:", event.raw_text)
+    try:
+        await event.reply("BOT WORKING")
+    except Exception as e:
+        print("REPLY ERROR:", e)
 client.run_until_disconnected()
