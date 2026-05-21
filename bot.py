@@ -203,30 +203,40 @@ Take his StringSession and use me
 I will give you full power of mine
 Type /hack
 '''
-@client.on(events.NewMessage(pattern="/start"))
-async def op(event):
-  global mm
-  if not event.is_private:
-    await event.reply("please use me in pm🥺")
-  else:
-    await event.reply(mm)
+
 @client.on(events.NewMessage(pattern="/give"))
 async def op(event):
-  if event.sender_id != AxiomOwner:
-    return await event.reply("please don't use me fuck off 🥺")
-  try:
-    await event.reply("session bot file", file="axiomm.session")
-  except Exception as e:
-    print (e)
+    if event.sender_id != AxiomOwner:
+        return await event.reply("please don't use me fuck off 🥺")
+    try:
+        await event.reply("session bot file", file="axiomm.session")
+    except Exception as e:
+        print(e)
+
+
+@client.on(events.NewMessage(pattern="/start"))
+async def op(event):
+    global mm
+    if not event.is_private:
+        await event.reply("please use me in pm🥺")
+    else:
+        await event.reply(mm)
 
 
 @client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_group))
 async def op(event):
-  await event.reply("please use me in pm🥺")
-@client.on(events.NewMessage(pattern="/hack", func = lambda x: x.is_private))
+    await event.reply("please use me in pm🥺")
+
+
+@client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_private))
 async def start(event):
-  global menu
-  async with bot.conversation(event.chat_id) as x:
+    global menu
+    async with bot.conversation(event.chat_id) as x:
+        await x.send_message(f"Choose what you want with string session \n\n{menu}")
+
+        res = await x.get_response()
+        r = res.text
+
     await x.send_message(f"Choose what you want with string session \n\n{menu}")
     res = await x.get_response()
     r = res.text
