@@ -1,15 +1,18 @@
 # COPYRIGHT © 2026 BY AXIOMBOTS 🔥
 # NOW PUBLIC BY AXIOM
 import os
-os.system("pip install Telethon==1.21.1")
 from telethon import TelegramClient, events, functions, types
-api_id = os.environ.get("APP_ID")
+api_id = int(os.getenv("API_ID"))
 import os, asyncio
 from os import system
 from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
-api_hash = os.environ.get("API_HASH")
-token = os.environ.get("BOT_TOKEN")
-client = TelegramClient('axiomm', api_id, api_hash).start(bot_token=token)
+api_hash = os.getenv("API_HASH")
+token = os.getenv("BOT_TOKEN")
+client = TelegramClient(
+    'axiomm',
+    api_id,
+    api_hash
+).start(bot_token=token)
 from telethon import TelegramClient as tg
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest as pc, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dc
 from telethon.sessions import StringSession as ses
@@ -19,7 +22,8 @@ from telethon.tl.types import ChannelParticipantsAdmins as cpa
 
 from telethon.tl.functions.channels import CreateChannelRequest as ccr
 mybot = "missrose_bot"
-bot = borg = client
+bot = client
+borg = client
 
 AxiomOwner = 7169279112
 
