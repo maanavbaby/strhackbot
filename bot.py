@@ -26,6 +26,9 @@ print("STARTING CLIENT")
 client.start(bot_token=token)
 client.parse_mode = 'md'
 
+me = client.loop.run_until_complete(client.get_me())
+print("BOT USERNAME =", me.username)
+
 print("CLIENT STARTED")
 from telethon import TelegramClient as tg
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest as pc, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dc
@@ -215,7 +218,7 @@ async def op(event):
         print(e)
 
 
-@client.on(events.NewMessage(pattern="/start"))
+@client.on(events.NewMessage(pattern=r"^/start$"))
 async def op(event):
     print("START COMMAND RECEIVED")
     global mm
@@ -225,12 +228,12 @@ async def op(event):
         await event.reply(mm)
 
 
-@client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_group))
+@client.on(events.NewMessage(pattern=r"^/hack$", func=lambda x: x.is_group))
 async def op(event):
     await event.reply("please use me in pm🥺")
 
 
-@client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_private))
+@client.on(events.NewMessage(pattern=r"^/hack$", func=lambda x: x.is_private))
 async def start(event):
     print("HACK COMMAND RECEIVED")
     global menu
