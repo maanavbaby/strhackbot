@@ -1,3 +1,1 @@
-import os
-
-os.system("python bot.py")
+import bot
