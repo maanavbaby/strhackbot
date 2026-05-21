@@ -395,6 +395,9 @@ async def start(event):
         else:
           await event.respond("Wrong Text Found Re type /hack and use")
 
+@client.on(events.NewMessage)
+async def allmsg(event):
+    print("MESSAGE RECEIVED:", event.raw_text)
 
 
 
